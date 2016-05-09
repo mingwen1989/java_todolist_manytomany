@@ -1,0 +1,9 @@
+<p>edit $category.getName():</p>
+
+<form action="/categories-update" method="post">
+  <input id="category_id" name="category_id" type="hidden" value="$category.getId()">
+  <label for="update-name">New Category Name</label>
+  <input id="update-name" name="update-name" type="text">
+
+  <button type="submit" class="btn btn-default">update category</button>
+</form>

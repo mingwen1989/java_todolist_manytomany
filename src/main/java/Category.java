@@ -80,6 +80,16 @@ public class Category {
     }
   }
 
+  public void update(String newName) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE categories SET name = :name WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("name", newName)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
   public List<Task> getTasks() {
     try(Connection con = DB.sql2o.open()){
       String joinQuery = "SELECT task_id FROM categories_tasks WHERE category_id = :category_id";

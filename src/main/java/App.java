@@ -84,6 +84,40 @@ public class App {
       return null;
     });
 
+    get("/tasks/:id/edit", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Task task = Task.find(Integer.parseInt(request.params("id")));
+      model.put("task", task);
+      model.put("template", "templates/task-edit.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/tasks-update", (request, response) -> {
+      int taskId = Integer.parseInt(request.queryParams("task_id"));
+      String description = request.queryParams("update-description");
+      Task updateTask = Task.find(taskId);
+      updateTask.update(description);
+      response.redirect("/tasks");
+      return null;
+    });
+
+    get("/categories/:id/edit", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Category category = Category.find(Integer.parseInt(request.params("id")));
+      model.put("category", category);
+      model.put("template", "templates/category-edit.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/categories-update", (request, response) -> {
+      int categoryId = Integer.parseInt(request.queryParams("category_id"));
+      String name = request.queryParams("update-name");
+      Category updateCategory = Category.find(categoryId);
+      updateCategory.update(name);
+      response.redirect("/categories");
+      return null;
+    });
+
 
   }
 }
