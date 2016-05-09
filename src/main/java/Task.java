@@ -5,18 +5,46 @@ import java.util.ArrayList;
 public class Task {
   private int id;
   private String description;
+  private static boolean completed;
 
 
-  public Task(String description) {
+  public Task(String description, boolean completed) {
     this.description = description;
+    this.completed = completed;
   }
 
   public String getDescription() {
     return description;
   }
 
+
+  public boolean getStatus() {
+    return completed;
+  }
+
   public int getId() {
     return id;
+  }
+
+  public static Task findComplete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM tasks where completed=true";
+      Task task = con.createQuery(sql)
+        .addParameter("completed", completed)
+        .executeAndFetchFirst(Task.class);
+      return task;
+    }
+  }
+
+  public void completeTask(){
+  //  completed = true;
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE tasks SET completed = true WHERE id = :id";
+      con.createQuery(sql)
+      //  .addParameter("completed", completed)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 
   public static List<Task> all() {
@@ -39,9 +67,10 @@ public class Task {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO tasks(description) VALUES (:description)";
+      String sql = "INSERT INTO tasks(description, completed) VALUES (:description, :completed)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("description", this.description)
+        .addParameter("completed", this.completed)
         .executeUpdate()
         .getKey();
     }

@@ -1,0 +1,7 @@
+<p>edit $task.getDescription():</p>
+
+<form action="/task-delete" method="post">
+  <input id="task_id" name="task_id" type="hidden" value="$task.getId()">
+
+  <button type="submit" class="btn btn-default">Confirm Delete Task</button>
+</form>
