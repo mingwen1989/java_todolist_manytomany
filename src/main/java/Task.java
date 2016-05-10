@@ -5,47 +5,47 @@ import java.util.ArrayList;
 public class Task {
   private int id;
   private String description;
-  private static boolean completed;
+  // private static boolean completed;
 
 
-  public Task(String description, boolean completed) {
+  public Task(String description) {
     this.description = description;
-    this.completed = completed;
+    // this.completed = completed;
   }
 
   public String getDescription() {
     return description;
   }
-
-
-  public boolean getStatus() {
-    return completed;
-  }
+  //
+  //
+  // public boolean getStatus() {
+  //   return completed;
+  // }
 
   public int getId() {
     return id;
   }
-
-  public static Task findComplete() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM tasks where completed=true";
-      Task task = con.createQuery(sql)
-        .addParameter("completed", completed)
-        .executeAndFetchFirst(Task.class);
-      return task;
-    }
-  }
-
-  public void completeTask(){
-  //  completed = true;
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE tasks SET completed = true WHERE id = :id";
-      con.createQuery(sql)
-      //  .addParameter("completed", completed)
-        .addParameter("id", this.id)
-        .executeUpdate();
-    }
-  }
+  //
+  // public static Task findComplete() {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT * FROM tasks WHERE completed=true";
+  //     Task task = con.createQuery(sql)
+  //       .addParameter("completed", completed)
+  //       .executeAndFetchFirst(Task.class);
+  //     return task;
+  //   }
+  // }
+  //
+  // public void completeTask(){
+  // //  completed = true;
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "UPDATE tasks SET completed = true WHERE id = :id";
+  //     con.createQuery(sql)
+  //     //  .addParameter("completed", completed)
+  //       .addParameter("id", this.id)
+  //       .executeUpdate();
+  //   }
+  // }
 
   public static List<Task> all() {
     String sql = "SELECT id, description FROM tasks";
@@ -67,10 +67,9 @@ public class Task {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO tasks(description, completed) VALUES (:description, :completed)";
+      String sql = "INSERT INTO tasks(description) VALUES (:description)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("description", this.description)
-        .addParameter("completed", this.completed)
         .executeUpdate()
         .getKey();
     }

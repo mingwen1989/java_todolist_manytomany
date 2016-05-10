@@ -32,7 +32,7 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String description = request.queryParams("description");
       boolean completed = false;
-      Task newTask = new Task(description, completed);
+      Task newTask = new Task(description);
       newTask.save();
       response.redirect("/tasks");
       return null;
@@ -150,21 +150,21 @@ public class App {
       response.redirect("/categories");
       return null;
     });
-
-    get("/tasks/:id/complete", (request, response) -> {
-      HashMap<String, Object> model = new HashMap<String, Object>();
-      Task task = Task.find(Integer.parseInt(request.params(":id")));
-      model.put("task", task);
-      model.put("template", "templates/task-complete.vtl");
-      return new ModelAndView(model, layout);
-    }, new VelocityTemplateEngine());
-
-    post("/tasks/:id/complete", (request, response) -> {
-      Task task = Task.find(Integer.parseInt(request.params("id")));
-      task.completeTask();
-      response.redirect("/tasks");
-      return null;
-    });
+    // 
+    // get("/tasks/:id/complete", (request, response) -> {
+    //   HashMap<String, Object> model = new HashMap<String, Object>();
+    //   Task task = Task.find(Integer.parseInt(request.params(":id")));
+    //   model.put("task", task);
+    //   model.put("template", "templates/task-complete.vtl");
+    //   return new ModelAndView(model, layout);
+    // }, new VelocityTemplateEngine());
+    //
+    // post("/tasks/:id/complete", (request, response) -> {
+    //   Task task = Task.find(Integer.parseInt(request.params("id")));
+    //   task.completeTask();
+    //   response.redirect("/tasks");
+    //   return null;
+    // });
 
 
   }

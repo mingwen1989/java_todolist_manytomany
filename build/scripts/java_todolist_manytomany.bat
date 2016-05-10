@@ -1,14 +1,14 @@
 @if "%DEBUG%" == "" @echo off
 @rem ##########################################################################
 @rem
-@rem  java_todolist_postgres startup script for Windows
+@rem  java_todolist_manytomany startup script for Windows
 @rem
 @rem ##########################################################################
 
 @rem Set local scope for the variables with windows NT shell
 if "%OS%"=="Windows_NT" setlocal
 
-@rem Add default JVM options here. You can also use JAVA_OPTS and JAVA_TODOLIST_POSTGRES_OPTS to pass JVM options to this script.
+@rem Add default JVM options here. You can also use JAVA_OPTS and JAVA_TODOLIST_MANYTOMANY_OPTS to pass JVM options to this script.
 set DEFAULT_JVM_OPTS=
 
 set DIRNAME=%~dp0
@@ -71,17 +71,17 @@ set CMD_LINE_ARGS=%$
 
 set CLASSPATH=%APP_HOME%\lib\todolist-1.0.jar;%APP_HOME%\lib\spark-core-2.3.jar;%APP_HOME%\lib\velocity-1.7.jar;%APP_HOME%\lib\sql2o-1.5.4.jar;%APP_HOME%\lib\postgresql-9.4-1201-jdbc41.jar;%APP_HOME%\lib\slf4j-api-1.7.12.jar;%APP_HOME%\lib\slf4j-simple-1.7.12.jar;%APP_HOME%\lib\jetty-server-9.3.2.v20150730.jar;%APP_HOME%\lib\jetty-webapp-9.3.2.v20150730.jar;%APP_HOME%\lib\websocket-server-9.3.2.v20150730.jar;%APP_HOME%\lib\websocket-servlet-9.3.2.v20150730.jar;%APP_HOME%\lib\commons-collections-3.2.1.jar;%APP_HOME%\lib\commons-lang-2.4.jar;%APP_HOME%\lib\javax.servlet-api-3.1.0.jar;%APP_HOME%\lib\jetty-http-9.3.2.v20150730.jar;%APP_HOME%\lib\jetty-io-9.3.2.v20150730.jar;%APP_HOME%\lib\jetty-xml-9.3.2.v20150730.jar;%APP_HOME%\lib\jetty-servlet-9.3.2.v20150730.jar;%APP_HOME%\lib\websocket-common-9.3.2.v20150730.jar;%APP_HOME%\lib\websocket-client-9.3.2.v20150730.jar;%APP_HOME%\lib\websocket-api-9.3.2.v20150730.jar;%APP_HOME%\lib\jetty-util-9.3.2.v20150730.jar;%APP_HOME%\lib\jetty-security-9.3.2.v20150730.jar
 
-@rem Execute java_todolist_postgres
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %JAVA_TODOLIST_POSTGRES_OPTS%  -classpath "%CLASSPATH%" App %CMD_LINE_ARGS%
+@rem Execute java_todolist_manytomany
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %JAVA_TODOLIST_MANYTOMANY_OPTS%  -classpath "%CLASSPATH%" App %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell
 if "%ERRORLEVEL%"=="0" goto mainEnd
 
 :fail
-rem Set variable JAVA_TODOLIST_POSTGRES_EXIT_CONSOLE if you need the _script_ return code instead of
+rem Set variable JAVA_TODOLIST_MANYTOMANY_EXIT_CONSOLE if you need the _script_ return code instead of
 rem the _cmd.exe /c_ return code!
-if  not "" == "%JAVA_TODOLIST_POSTGRES_EXIT_CONSOLE%" exit 1
+if  not "" == "%JAVA_TODOLIST_MANYTOMANY_EXIT_CONSOLE%" exit 1
 exit /b 1
 
 :mainEnd
